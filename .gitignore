@@ -3,4 +3,6 @@
 *.orig
 *.rej
 st
+patches
+patches/*
 

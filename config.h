@@ -5,7 +5,6 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-//static char *font = "Liberation Mono:pixelsize=12:antialias=true:autohint=true";
 static char *font = "JetBrainsMono NFM:pixelsize=24:antialias=true:autohint=true";
 static int borderpx = 2;
 
@@ -107,7 +106,7 @@ static const char *colorname[] = {
 	[ 4] = "#0749b4", /* blue */
 	[ 5] = "#4f43ae", /* magenta */
 	[ 6] = "#b5b6e4", /* cyan */
-	[ 7] = "#211a21", /* light gray */
+	[ 7] = "#908a99", /* light gray */
 
 	/* 8 bright colors */
 	[ 8] = "#605766", /* dark gray */
@@ -117,7 +116,12 @@ static const char *colorname[] = {
 	[12] = "#0749b4", /* blue */
 	[13] = "#4f43ae", /* magenta */
 	[14] = "#b5b6e4", /* cyan */
-	[15] = "#cec9cc", /* dark */
+	[15] = "#cec9cc", /* white */
+
+	[255] = 0,
+
+	/* alpha patch needs seperated background color */
+	"#211a21", /* background */
 };
 
 
@@ -126,7 +130,7 @@ static const char *colorname[] = {
  * foreground, background, cursor, reverse cursor
  */
 unsigned int defaultfg = 15;
-unsigned int defaultbg = 0;
+unsigned int defaultbg = 256;
 unsigned int defaultcs = 15;
 static unsigned int defaultrcs = 257;
 
@@ -172,8 +176,6 @@ static uint forcemousemod = ShiftMask;
  */
 static MouseShortcut mshortcuts[] = {
 	/* mask                 button   function        argument       release */
-	{ XK_ANY_MOD,           Button4, kscrollup,      {.i = 1},		0, /* !alt */ -1 },
-	{ XK_ANY_MOD,           Button5, kscrolldown,    {.i = 1},		0, /* !alt */ -1 },
 	{ XK_ANY_MOD,           Button2, selpaste,       {.i = 0},      1 },
 	{ ShiftMask,            Button4, ttysend,        {.s = "\033[5;2~"} },
 	{ XK_ANY_MOD,           Button4, ttysend,        {.s = "\031"} },
@@ -199,8 +201,6 @@ static Shortcut shortcuts[] = {
 	{ TERMMOD,              XK_Y,           selpaste,       {.i =  0} },
 	{ ShiftMask,            XK_Insert,      selpaste,       {.i =  0} },
 	{ TERMMOD,              XK_Num_Lock,    numlock,        {.i =  0} },
-	{ ShiftMask,            XK_Page_Up,     kscrollup,      {.i = -1} },
-	{ ShiftMask,            XK_Page_Down,   kscrolldown,    {.i = -1} },
 };
 
 /*
